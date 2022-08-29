@@ -12,12 +12,14 @@
  */
 
 // import * as Sentry from '@sentry/nextjs'
-import { NextPageContext } from 'next'
-import NextErrorComponent from 'next/error'
+import { NextPage, NextPageContext } from 'next'
+import NextErrorComponent, { ErrorProps } from 'next/error'
 
-const CustomErrorComponent = (props: { statusCode: any }) => (
-  <p> Custom 500 page from pages/_error </p>
-)
+const CustomErrorComponent: NextPage<ErrorProps> = props => {
+  return (
+    <p> Custom 500 page from pages/_error </p>
+  );
+};
 
 async function reportError(contextData: NextPageContext) {
   if(contextData.err){
