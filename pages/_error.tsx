@@ -9,10 +9,17 @@ const CustomErrorComponent: NextPage<ErrorProps> = props => {
 };
 
 async function reportError(contextData: NextPageContext) {
-  console.log("reporting error to error service:")
-  console.log(contextData.err.message)
-  console.log(contextData.err.stack)
-  console.log("done reporting error.")
+  if(contextData.err){
+    console.log("no error to report:")
+    console.log(contextData.req)
+    console.log(contextData.asPath)
+    console.log(contextData.pathname)
+  } else {
+    console.log("reporting error to error service:")
+    console.log(contextData.err.message)
+    console.log(contextData.err.stack)
+    console.log("done reporting error.")
+  }
 }
 
 CustomErrorComponent.getInitialProps = async contextData => {
