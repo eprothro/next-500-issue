@@ -22,6 +22,7 @@ const CustomErrorComponent: NextPage<ErrorProps> = props => {
 };
 
 async function reportError(contextData: NextPageContext) {
+  const { req, res, err } = contextData;
   if(contextData.err){
     console.log("reporting error to error service:")
     console.log(`  message: ${contextData.err.message}`)
@@ -29,6 +30,7 @@ async function reportError(contextData: NextPageContext) {
     console.log("done reporting error.")
   } else {
     console.log("An error occurred, but there was no error information in the NextPageContext:")
+    console.log(err)
     console.log(`  path: ${contextData.asPath}`)
     console.log(`  page: ${contextData.pathname}`)
     console.log(`  status: ${contextData.res?.statusCode}`)
