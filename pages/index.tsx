@@ -2,8 +2,8 @@
 import { InferGetServerSidePropsType, NextPage } from "next";
 
 export async function getServerSideProps() {
-  console.log('about to throw error from index/getServerSideProps');
-  throw new Error('a test error has been manually triggered');
+  console.log('about to throw error from index.getServerSideProps');
+  throw new Error('an error has been thrown from index.getServerSideProps');
 }
 
 const TestServerSideErrorPage: NextPage<
