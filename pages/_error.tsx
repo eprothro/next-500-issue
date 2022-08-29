@@ -8,15 +8,10 @@ const CustomErrorComponent: NextPage<ErrorProps> = props => {
   );
 };
 
-async function reportError(contextData: NextPageContext) {
-  console.log("reporting error to error service:")
-  // console.log(contextData)
-}
-
 CustomErrorComponent.getInitialProps = async contextData => {
   // In case this is running in a serverless function, await this in order to give
   // time to send the error before the lambda exits
-  await reportError(contextData);
+  console.log("reporting error to error service:")
 
 
   // This will contain the status code of the response
