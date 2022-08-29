@@ -4,7 +4,7 @@ import NextErrorComponent from "next/error";
 
 const CustomErrorComponent: NextPage<ErrorProps> = props => {
   return (
-    <p> Custom 500 page </p>
+    <p> Custom 500 page from pages/_error </p>
   );
 };
 
