@@ -16,7 +16,7 @@ import { NextPageContext } from 'next'
 import NextErrorComponent from 'next/error'
 
 const CustomErrorComponent = (props: { statusCode: any }) => (
-  <NextErrorComponent statusCode={props.statusCode} />
+  <p> Custom 500 page from pages/_error </p>
 )
 
 async function reportError(contextData: NextPageContext) {
