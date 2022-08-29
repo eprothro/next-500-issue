@@ -11,7 +11,8 @@ const CustomErrorComponent: NextPage<ErrorProps> = props => {
 CustomErrorComponent.getInitialProps = async contextData => {
   // In case this is running in a serverless function, await this in order to give Sentry
   // time to send the error before the lambda exits
-  console.log("reporting error to error service")
+  console.log("reporting error to error service:")
+  console.log(contextData)
 
   // This will contain the status code of the response
   return NextErrorComponent.getInitialProps(contextData);
