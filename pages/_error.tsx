@@ -1,12 +1,23 @@
-import type { NextPage, NextPageContext } from "next";
-import type { ErrorProps } from "next/error";
-import NextErrorComponent from "next/error";
+/**
+ * This page is loaded by Nextjs:
+ *  - on the server, when data-fetching methods throw or reject
+ *  - on the client, when `getInitialProps` throws or rejects
+ *  - on the client, when a React lifecycle method throws or rejects, and it's
+ *    caught by the built-in Nextjs error boundary
+ *
+ * See:
+ *  - https://nextjs.org/docs/basic-features/data-fetching/overview
+ *  - https://nextjs.org/docs/api-reference/data-fetching/get-initial-props
+ *  - https://reactjs.org/docs/error-boundaries.html
+ */
 
-const CustomErrorComponent: NextPage<ErrorProps> = props => {
-  return (
-    <p> Custom 500 page from pages/_error </p>
-  );
-};
+// import * as Sentry from '@sentry/nextjs'
+import { NextPageContext } from 'next'
+import NextErrorComponent from 'next/error'
+
+const CustomErrorComponent = (props: { statusCode: any }) => (
+  <NextErrorComponent statusCode={props.statusCode} />
+)
 
 async function reportError(contextData: NextPageContext) {
   if(contextData.err){
@@ -22,17 +33,14 @@ async function reportError(contextData: NextPageContext) {
   }
 }
 
-CustomErrorComponent.getInitialProps = async contextData => {
-  // In case this is running in a serverless function, await this in order to give
+CustomErrorComponent.getInitialProps = async (contextData: NextPageContext) => {
+  // In case this is running in a serverless function, await this in order to give Sentry
   // time to send the error before the lambda exits
-  //
-  // Any 404 will be caught by our custom error page
-  // at pages/404 so if we're here we know we have an error
-  await reportError(contextData);
-
+  // await Sentry.captureUnderscoreErrorException(contextData)
+  await reportError(contextData)
 
   // This will contain the status code of the response
-  return NextErrorComponent.getInitialProps(contextData);
-};
+  return NextErrorComponent.getInitialProps(contextData)
+}
 
-export default CustomErrorComponent;
+export default CustomErrorComponent
