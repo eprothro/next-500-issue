@@ -10,7 +10,7 @@ const CustomErrorComponent: NextPage<ErrorProps> = props => {
 
 async function reportError(contextData: NextPageContext) {
   console.log("reporting error to error service:")
-  console.log(contextData)
+  // console.log(contextData)
 }
 
 CustomErrorComponent.getInitialProps = async contextData => {
